@@ -6,9 +6,9 @@
 {% block body %}
 	<h1>Booking index</h1>
 
-	<table class="table">
+	<table class="table table-bordered border border-3  w-100">
 		<thead>
-			<tr>
+			<tr class="bg-danger">
 				<th>Id</th>
 				<th>Title</th>
 				<th>Start</th>
@@ -21,18 +21,18 @@
 				<th>actions</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="bg-dark text-white">
 			{% for booking in bookings %}
 				<tr>
 					<td>{{ booking.id }}</td>
 					<td>{{ booking.title }}</td>
-					<td>{{ booking.start ? booking.start|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ booking.end ? booking.end|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ booking.start ? booking.start|date('Y-m-d') : '' }}</td>
+					<td>{{ booking.end ? booking.end|date('Y-m-d') : '' }}</td>
 					<td>{{ booking.description }}</td>
 					<td>{{ booking.allDay ? 'Yes' : 'No' }}</td>
-					<td>{{ booking.backgroundColor }}</td>
-					<td>{{ booking.borderColor }}</td>
-					<td>{{ booking.textColor }}</td>
+					<td style="background-color:{{ booking.backgroundColor }}"></td>
+					<td style="background-color:{{ booking.borderColor  }}"></td>
+					<td style="background-color:{{ booking.textColor }}"></td>
 					<td>
 						<a href="{{ path('app_booking_show', {'id': booking.id}) }}">show</a>
 						<a href="{{ path('app_booking_edit', {'id': booking.id}) }}">edit</a>
