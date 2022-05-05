@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Booking;
 use App\Repository\BookingRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main')]
-    public function index(BookingRepository $calendar): Response
+    public function index(BookingRepository $calendar,ManagerRegistry $comp): Response
     {
         $events = $calendar->findAll();
 
@@ -31,8 +33,10 @@ class MainController extends AbstractController
         }
 
         $data = json_encode($rdv);
+        $bookings = $comp->getRepository(Booking::class)->findAll();;
 
         
-        return $this->render('main/index.html.twig', compact('data'));
+        return $this->render('main/index.html.twig', compact(['data', 'bookings'])
+    );
     }
 }

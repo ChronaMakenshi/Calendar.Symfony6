@@ -1,0 +1,30 @@
+<table id="datatable" class="table table-bordered border border-3  w-100">
+	<thead>
+		<tr class="bg-danger">
+			<th>Id</th>
+			<th>Title</th>
+			<th>Start</th>
+			<th>End</th>
+			<th>Description</th>
+			<th>All_day</th>
+			<th>Background_color</th>
+			<th>Border_color</th>
+			<th>Text_color</th>
+		</tr>
+	</thead>
+	<tbody class="bg-dark text-white">
+		{% for booking in bookings %}
+			<tr>
+				<td>{{ booking.id }}</td>
+				<td>{{ booking.title }}</td>
+				<td>{{ booking.start ? booking.start|date('Y-m-d') : '' }}</td>
+				<td>{{ booking.end ? booking.end|date('Y-m-d') : '' }}</td>
+				<td>{{ booking.description }}</td>
+				<td>{{ booking.allDay ? 'Yes' : 'No' }}</td>
+				<td>{{ booking.backgroundColor }}</td>
+				<td>{{ booking.borderColor }}</td>
+				<td>{{ booking.textColor }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

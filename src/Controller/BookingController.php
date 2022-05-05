@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Booking;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/booking')]
 class BookingController extends AbstractController
@@ -73,4 +74,5 @@ class BookingController extends AbstractController
 
         return $this->redirectToRoute('app_booking_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

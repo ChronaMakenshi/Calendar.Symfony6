@@ -2,7 +2,9 @@
 
 {% block title %}Calendier
 {% endblock %}
+
 {% block body %}
+	{% include 'list/index.html.twig' %}
 	<div id="calendrier"></div>
 {% endblock %}
 {% block stylesheets %}
@@ -13,22 +15,29 @@
 {% block javascripts %}
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.js" integrity="sha256-bFpArdcNM5XcSM+mBAUSDAt4YmEIeSAdUASB2rrSli4=" crossorigin="anonymous"></script>
 	<script>
-		window.onload = () => {
+		{
+window.onload = () => {
 let calendarEl = document.querySelector('#calendrier');
 let calendar = new FullCalendar.Calendar(calendarEl, {
+titleFormat: { // will produce something like "Tuesday, September 18, 2018"
+month: 'long',
+year: 'numeric',
+day: 'numeric',
+weekday: 'long'
+},
 initialView: 'dayGridMonth',
 locale: 'fr',
 timeZone: 'Europe/Paris',
 headerToolbar: {
 start: 'today prev,next',
 center: 'title',
-end: 'dayGridMonth'
+end: 'dayGridMonth',
+themeSystem: 'bootstrap5'
 },
 
 events: {{ data|raw }},
 editable: true,
 eventResizableFromStart: true
-
 
 })
 
@@ -52,6 +61,8 @@ xhr.send(JSON.stringify(donnees))
 })
 
 calendar.render()
+}
+
 }
 	</script>
 {% endblock %}
